@@ -1,0 +1,12 @@
+environments:
+  default:
+    values:
+      - foo: from-env-{{ $.Environment.Name }}
+---
+releases:
+  - name: test
+    chart: ./chart
+    valuesTemplate:
+      - foo: from-release-{{`{{ $.Release.Name }}`}}
+    strategicMergePatches:
+      - patch.yaml.gotmpl
